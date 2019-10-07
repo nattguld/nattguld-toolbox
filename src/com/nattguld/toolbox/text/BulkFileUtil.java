@@ -35,7 +35,7 @@ public class BulkFileUtil {
 				files.add(f);
 			}
 		} else {
-			files = FileOperations.getFileTree(dir, true);
+			files = FileOperations.fetchFileTree(dir, true);
 		}
 		for (File f : files) {
 			File out = FileOperations.addRandomBytes(f, new File(outputDir.getAbsolutePath() + File.separator + f.getName()));
