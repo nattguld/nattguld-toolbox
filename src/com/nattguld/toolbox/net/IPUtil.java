@@ -3,6 +3,7 @@ package com.nattguld.toolbox.net;
 import java.util.Objects;
 
 import com.google.gson.JsonObject;
+import com.nattguld.data.json.JsonReader;
 import com.nattguld.http.HttpClient;
 import com.nattguld.http.proxies.HttpProxy;
 import com.nattguld.http.proxies.ProxyManager;
@@ -38,14 +39,14 @@ public class IPUtil {
     		if (!rr.validate()) {
     			return "Failed to check IP detection for " + ip;
     		}
-    		JsonObject jsonObject = rr.getAsJsonElement().getAsJsonObject();
+    		JsonReader jsonReader = rr.getJsonReader();
     		
-    		String status = jsonObject.get("status").getAsString();
+    		String status = jsonReader.getAsString("status");
     		
     		if (!status.equalsIgnoreCase(status)) {
     			return "Unexpected status: " + status + " while checking detection for " + ip;
     		}
-    		JsonObject detailsObj = jsonObject.get(ip).getAsJsonObject();
+    		JsonObject detailsObj = jsonReader.getAsJsonObject(ip);
     		
     		String detected = detailsObj.get("proxy").getAsString();
     		

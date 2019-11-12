@@ -8,7 +8,7 @@ import org.jsoup.nodes.Element;
 
 import com.nattguld.http.HttpClient;
 import com.nattguld.http.proxies.HttpProxy;
-import com.nattguld.http.proxies.ProxyManager;
+import com.nattguld.http.proxies.standard.StandardProxyManager;
 import com.nattguld.http.requests.impl.GetRequest;
 import com.nattguld.http.response.RequestResponse;
 
@@ -47,7 +47,7 @@ public class ProxyScraping {
 			
 			if (rr.validate()) {
 				for (String line : rr.getResponseContent().split("\\n")) {
-					HttpProxy proxy = ProxyManager.parse(line);
+					HttpProxy proxy = StandardProxyManager.getSingleton().parse(line);
 					
 					if (Objects.isNull(proxy)) {
 						continue;
@@ -67,7 +67,7 @@ public class ProxyScraping {
 			
 			if (rr.validate()) {
 				for (String line : rr.getResponseContent().split("\\n")) {
-					HttpProxy proxy = ProxyManager.parse(line);
+					HttpProxy proxy = StandardProxyManager.getSingleton().parse(line);
 				
 					if (Objects.isNull(proxy)) {
 						continue;
@@ -91,7 +91,7 @@ public class ProxyScraping {
 						continue;
 					}
 					String format = line.split(" ")[0];
-					HttpProxy proxy = ProxyManager.parse(format);
+					HttpProxy proxy = StandardProxyManager.getSingleton().parse(format);
 				
 					if (Objects.isNull(proxy)) {
 						continue;
@@ -114,7 +114,7 @@ public class ProxyScraping {
 				Element div = id.getElementsByTag("div").first();
 			
 				for (String line : div.text().split("\\n")) {
-					HttpProxy proxy = ProxyManager.parse(line);
+					HttpProxy proxy = StandardProxyManager.getSingleton().parse(line);
 				
 					if (Objects.isNull(proxy)) {
 						continue;

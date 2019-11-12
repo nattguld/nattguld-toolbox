@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.nattguld.data.json.JsonReader;
 import com.nattguld.http.HttpClient;
 import com.nattguld.http.requests.impl.GetRequest;
 import com.nattguld.http.response.RequestResponse;
@@ -220,9 +220,9 @@ public class Dictionary {
 			if (!rr.validate()) {
 				return results;
 			}
-			JsonArray respArr = rr.getAsJsonElement().getAsJsonArray();
+			JsonReader jsonReader = rr.getJsonReader();
 			
-			for (JsonElement el : respArr) {
+			for (JsonElement el : jsonReader.getArray()) {
 				JsonObject result = el.getAsJsonObject();
 				
 				results.add(result.get("word").getAsString());
